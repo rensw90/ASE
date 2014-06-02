@@ -6,8 +6,8 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/spring-ws-camel" />
     <file type="web" url="file://$PROJECT_DIR$/spring-ws-jms" />
-    <file type="web" url="file://$PROJECT_DIR$/spring-ws/Calculator" />
     <file type="web" url="file://$PROJECT_DIR$/spring-ws/HolidayService" />
+    <file type="web" url="file://$PROJECT_DIR$/spring-ws/Registration" />
   </component>
   <component name="IdProvider" IDEtalkID="0AD39A3BDF4170840DBCA7D51520E480" />
   <component name="MavenProjectsManager">
