@@ -26,11 +26,13 @@
         <module name="Calculator" />
         <module name="Dare2DateCamel" />
         <module name="holidayService" />
+        <module name="Registration" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Calculator" target="1.5" />
       <module name="holidayService" target="1.6" />
+      <module name="Registration" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

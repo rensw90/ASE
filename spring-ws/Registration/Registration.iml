@@ -7,13 +7,8 @@
           <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
         </descriptors>
         <webroots>
-          <root url="file://$MODULE_DIR$/../Calculator/src/main/webapp" relative="/" />
+          <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/../Calculator/target/generated-sources/xjc" />
-          <root url="file://$MODULE_DIR$/../Calculator/src/main/java" />
-          <root url="file://$MODULE_DIR$/../Calculator/src/main/resources" />
-        </sourceRoots>
       </configuration>
     </facet>
     <facet type="jpa" name="JPA">
@@ -35,12 +30,13 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/../Calculator/target/classes" />
-    <output-test url="file://$MODULE_DIR$/../Calculator/target/test-classes" />
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/xjc" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/xjc" isTestSource="false" generated="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target/calculator" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
     </content>
     <orderEntry type="inheritedJdk" />

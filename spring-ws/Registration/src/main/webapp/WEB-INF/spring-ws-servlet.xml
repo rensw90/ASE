@@ -10,34 +10,24 @@
           class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
         <property name="xsds">
             <list>
-                <value>/calculator/messages.xsd</value>
+                <value>/registration/messages.xsd</value>
             </list>
         </property>
         <property name="inline" value="true"/>
     </bean>
-    <bean id="calculatorService" class="nl.ead.webservice.services.CalculatorEndpoint">
-        <constructor-arg ref="marshaller"/>
+    <bean id="registrationService" class="nl.ase.dare2date.webservice.application.ApplyRegistrationEndpoint">
+    <constructor-arg ref="marshaller"/>
         <constructor-arg ref="unmarshaller"/>
-        <constructor-arg ref="moviePrinter"/>
-        <constructor-arg ref="calculationDao"/>
     </bean>
 
-    <!-- Small example of how to use a factory bean in Spring. Not really necessary for this case. -->
-    <bean id="moviePrinter" factory-bean="moviePrinterFactory" factory-method="create"/>
-
-    <bean id="moviePrinterFactory" class="nl.ead.webservice.services.MoviePrinterFactory"/>
-
-    <bean id="calculationDao" class="nl.ead.webservice.dao.CalculationDao"/>
-
-    <bean
-            class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
-        <constructor-arg ref="marshaller"/>
+    <bean class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
+    <constructor-arg ref="marshaller"/>
     </bean>
     <bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-        <property name="contextPath" value="nl.ead.webservice"/>
+        <property name="contextPath" value="nl.ase.dare2date.webservice"/>
     </bean>
     <bean id="unmarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-        <property name="contextPath" value="nl.ead.webservice"/>
+        <property name="contextPath" value="nl.ase.dare2date.webservice"/>
     </bean>
     <bean id="annotationMapping"
           class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
@@ -57,12 +47,12 @@
         </property>
         <property name="order" value="1"/>
     </bean>
-    <bean id="calculatorservice"
+    <bean id="registrationservice"
           class="org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition">
         <property name="schemaCollection" ref="schemaCollection"/>
         <property name="portTypeName" value="Service"/>
-        <property name="locationUri" value="http://localhost:8080/calculator"/>
+        <property name="locationUri" value="http://localhost:8080/registration"/>
         <property name="targetNamespace"
-                  value="http://www.han.nl/schemas/calculator/definitions"/>
+                  value="http://www.han.nl/schemas/messages"/>
     </bean>
 </beans>
