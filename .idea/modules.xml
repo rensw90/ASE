@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/spring-ws-jms/ApplyRegistrationService.iml" filepath="$PROJECT_DIR$/spring-ws-jms/ApplyRegistrationService.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-ws/Calculator/Calculator.iml" filepath="$PROJECT_DIR$/spring-ws/Calculator/Calculator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-ws-camel/Dare2DateCamel.iml" filepath="$PROJECT_DIR$/spring-ws-camel/Dare2DateCamel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-ws/HolidayService/holidayService.iml" filepath="$PROJECT_DIR$/spring-ws/HolidayService/holidayService.iml" />
+    </modules>
+  </component>
+</project>
+
