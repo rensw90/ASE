@@ -17,6 +17,7 @@
         <option value="$PROJECT_DIR$/spring-ws/HolidayService/pom.xml" />
         <option value="$PROJECT_DIR$/spring-ws-jms/pom.xml" />
         <option value="$PROJECT_DIR$/spring-ws-camel/pom.xml" />
+        <option value="$PROJECT_DIR$/spring-ws/Registration/pom.xml" />
       </list>
     </option>
   </component>
