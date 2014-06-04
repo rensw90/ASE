@@ -22,6 +22,7 @@
         <constructor-arg ref="verifyRegistration"/>
         <constructor-arg ref="confirmRegistration"/>
         <constructor-arg ref="saveRegistration"/>
+        <constructor-arg ref="verifyPayment"/>
     </bean>
 
     <bean id="verifyRegistration" class="nl.ase.dare2date.webservice.registration.VerifyRegistration">
@@ -35,6 +36,11 @@
     </bean>
 
     <bean id="saveRegistration" class="nl.ase.dare2date.webservice.persistence.SaveRegistration"></bean>
+
+    <bean id="verifyPayment" class="nl.ase.dare2date.webservice.payment.VerifyPayment">
+        <constructor-arg ref="makePayment"/>
+    </bean>
+    <bean id="makePayment" class="nl.ase.dare2date.webservice.payment.PayPalAdapter"></bean>
 
     <bean class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
         <constructor-arg ref="marshaller"/>

@@ -4,6 +4,7 @@ import nl.ase.dare2date.webservice.RegistrationRequest;
 import nl.ase.dare2date.webservice.RegistrationResponse;
 import nl.ase.dare2date.webservice.RegistrationResult;
 import nl.ase.dare2date.webservice.confirm.IConformRegistration;
+import nl.ase.dare2date.webservice.payment.IVerifyPayment;
 import nl.ase.dare2date.webservice.persistence.ISaveRegistration;
 import nl.ase.dare2date.webservice.registration.IVerifyRegistration;
 import org.springframework.oxm.Marshaller;
@@ -19,13 +20,15 @@ public class ApplyRegistrationEndpoint {
     private IVerifyRegistration verifyRegistration;
     private IConformRegistration conformRegistration;
     private ISaveRegistration saveRegistration;
+    private IVerifyPayment verifyPayment;
 
-    public ApplyRegistrationEndpoint(Marshaller marshaller, Unmarshaller unmarshaller, IVerifyRegistration verifyRegistration, IConformRegistration confirmRegistration, ISaveRegistration saveRegistration) {
+    public ApplyRegistrationEndpoint(Marshaller marshaller, Unmarshaller unmarshaller, IVerifyRegistration verifyRegistration, IConformRegistration confirmRegistration, ISaveRegistration saveRegistration, IVerifyPayment verifyPayment) {
         this.marshaller = marshaller;
         this.unmarshaller = unmarshaller;
         this.verifyRegistration = verifyRegistration;
         this.conformRegistration = confirmRegistration;
         this.saveRegistration = saveRegistration;
+        this.verifyPayment = verifyPayment;
     }
 
     @SuppressWarnings({"unchecked", "deprecation"})

@@ -23,7 +23,6 @@ public class MailgunAdapter implements IVerifyEmail {
         return false;
     }
 
-
     public boolean executeMailgunEmailValidation(String email) throws Exception {
         //pubkey-177ymudf6a3jq3rer-z6gfro-c36agq8
 
@@ -45,7 +44,6 @@ public class MailgunAdapter implements IVerifyEmail {
         //System.out.println();
         return new JSONObject(results).getBoolean("is_valid");
     }
-
 
 
 }
