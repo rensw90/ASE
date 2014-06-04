@@ -15,13 +15,29 @@
         </property>
         <property name="inline" value="true"/>
     </bean>
+
     <bean id="registrationService" class="nl.ase.dare2date.webservice.application.ApplyRegistrationEndpoint">
-    <constructor-arg ref="marshaller"/>
+        <constructor-arg ref="marshaller"/>
         <constructor-arg ref="unmarshaller"/>
+        <constructor-arg ref="verifyRegistration"/>
+        <constructor-arg ref="confirmRegistration"/>
+        <constructor-arg ref="saveRegistration"/>
     </bean>
 
+    <bean id="verifyRegistration" class="nl.ase.dare2date.webservice.registration.VerifyRegistration">
+        <constructor-arg ref="mailgunAdapter"/>
+    </bean>
+    <bean id="mailgunAdapter" class="nl.ase.dare2date.webservice.registration.MailgunAdapter"></bean>
+
+    <bean id="confirmRegistration" class="nl.ase.dare2date.webservice.confirm.ConfirmRegistration">
+        <constructor-arg type="java.lang.String" value="key-8uyia6562v-dr6j5m3a1gx0d4cogmkx7"/>
+        <constructor-arg type="java.lang.String" value="sandbox03f8bee02d4443a1aa757263823c4519.mailgun.org"/>
+    </bean>
+
+    <bean id="saveRegistration" class="nl.ase.dare2date.webservice.persistence.SaveRegistration"></bean>
+
     <bean class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
-    <constructor-arg ref="marshaller"/>
+        <constructor-arg ref="marshaller"/>
     </bean>
     <bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="contextPath" value="nl.ase.dare2date.webservice"/>
@@ -53,6 +69,6 @@
         <property name="portTypeName" value="Service"/>
         <property name="locationUri" value="http://localhost:8080/registration"/>
         <property name="targetNamespace"
-                  value="http://www.han.nl/schemas/messages"/>
+                  value="http://www.han.nl/schemas/calculator/definitions"/>
     </bean>
 </beans>
