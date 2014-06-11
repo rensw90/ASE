@@ -45,7 +45,7 @@ public class ApplyRegistrationEndpoint {
                 if (saveRegistration.saveSubscriber(req.getInput().getSubscriber())) {
                     result.setMessage("succeeded");
                     result.setSucceeded(true);
-                    conformRegistration.confirmNewSubscriber(req.getInput().getSubscriber());
+                    //conformRegistration.confirmNewSubscriber(req.getInput().getSubscriber());
                 }
             }
 
