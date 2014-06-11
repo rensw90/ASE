@@ -12,6 +12,8 @@ import org.springframework.oxm.Unmarshaller;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 
+import java.io.IOException;
+
 @Endpoint
 public class ApplyRegistrationEndpoint {
 
@@ -19,7 +21,7 @@ public class ApplyRegistrationEndpoint {
     private Unmarshaller unmarshaller;
     private IVerifyRegistration verifyRegistration;
     private IConformRegistration conformRegistration;
-    private ISaveRegistration saveRegistration;
+    //private ISaveRegistration saveRegistration;
     private IVerifyPayment verifyPayment;
 
     public ApplyRegistrationEndpoint(Marshaller marshaller, Unmarshaller unmarshaller, IVerifyRegistration verifyRegistration, IConformRegistration confirmRegistration, ISaveRegistration saveRegistration, IVerifyPayment verifyPayment) {
@@ -27,7 +29,7 @@ public class ApplyRegistrationEndpoint {
         this.unmarshaller = unmarshaller;
         this.verifyRegistration = verifyRegistration;
         this.conformRegistration = confirmRegistration;
-        this.saveRegistration = saveRegistration;
+        //this.saveRegistration = saveRegistration;
         this.verifyPayment = verifyPayment;
     }
 
@@ -36,15 +38,21 @@ public class ApplyRegistrationEndpoint {
     public RegistrationResponse applyRegistration(RegistrationRequest req) {
 
         RegistrationResult result = new RegistrationResult();
+        /*
         if (verifyRegistration.verifyRegistration(req.getInput().getSubscriber()) == true) {
             result.setSucceeded(true);
             //conformRegistration.confirmNewSubscriber(req.getInput().getSubscriber());
         } else {
             result.setSucceeded(false);
-        }
-        saveRegistration.saveSubscriber(req.getInput().getSubscriber());
+        }*/
+        //saveRegistration.saveSubscriber(req.getInput().getSubscriber());
         result.setMessage("Here are the results of the jury for the calculation ");
-        //result.setSucceeded(false);
+        result.setSucceeded(false);
+        try {
+            verifyPayment.verifyPaymentData(req.getInput().getPaymentData());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         RegistrationResponse resp = new RegistrationResponse();
         resp.setResult(result);
 
