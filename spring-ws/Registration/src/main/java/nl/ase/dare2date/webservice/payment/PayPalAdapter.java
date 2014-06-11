@@ -6,6 +6,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import nl.ase.dare2date.webservice.PaymentData;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.ws.rs.core.MediaType;
@@ -16,42 +17,33 @@ import javax.ws.rs.core.MediaType;
 public class PayPalAdapter implements IMakePayment {
     private final String USER_AGENT = "Mozilla/5.0";
     private String charset = "UTF-8";
+    private String accessToken = "";
+    private String clientID = "Acd-OBCht6k0EBUrT0RH-gfSA9pjlWqLyflGslo-qBBEPoIfcp_mrlyHyGk9";
+    private String clientSecret = "EH7fahDhT6rHE6C-gX3v-sf-zv1pFIgC0kEGbf2B1V7UIDg4c9GBxAk9OvEv";
 
     public PayPalAdapter() {
-        String clientID = "Acd-OBCht6k0EBUrT0RH-gfSA9pjlWqLyflGslo-qBBEPoIfcp_mrlyHyGk9";
-        String clientSecret = "EH7fahDhT6rHE6C-gX3v-sf-zv1pFIgC0kEGbf2B1V7UIDg4c9GBxAk9OvEv";
     }
 
     public boolean payment(PaymentData paymentData) {
-        /*
-        String baseUrl = "https://api.sandbox.paypal.com";
-        String urlRequest = "/v1/vault/credit-card";
-        String url = baseUrl + urlRequest;
-        this.doGet(url);
-        */
-        String token = getPayPalAccessToken();
-        System.out.println(token);
-        System.out.println("TEST");
-
-        return false;
+        return getPayPalAccessToken();
     }
 
-    public String getPayPalAccessToken() {
+    public boolean getPayPalAccessToken() throws JSONException {
         Client client = Client.create();
-        client.addFilter(new HTTPBasicAuthFilter("Acd-OBCht6k0EBUrT0RH-gfSA9pjlWqLyflGslo-qBBEPoIfcp_mrlyHyGk9", "EH7fahDhT6rHE6C-gX3v-sf-zv1pFIgC0kEGbf2B1V7UIDg4c9GBxAk9OvEv"));
+        client.addFilter(new HTTPBasicAuthFilter(clientID, clientSecret));
 
-        WebResource webResource = client.resource("https://api.sandbox.paypal.com" +
-                "/v1/oauth2/token");
-
+        WebResource webResource = client.resource("https://api.sandbox.paypal.com" + "/v1/oauth2/token");
         MultivaluedMapImpl formData = new MultivaluedMapImpl();
         formData.add("grant_type", "client_credentials");
 
         ClientResponse clientResponse = webResource.accept(MediaType.APPLICATION_JSON).type(MediaType.APPLICATION_FORM_URLENCODED).post(ClientResponse.class, formData);
-        String output = clientResponse.getEntity(String.class);
-        JSONObject test = new JSONObject(output);
 
-        return test.getString("access_token");
+        JSONObject jsonResponse = new JSONObject(clientResponse.getEntity(String.class));
+        try {
+            this.accessToken = jsonResponse.getString("access_token");
+        } catch (JSONException e) {
+            return false;
+        }
+        return true;
     }
-
-
 }
