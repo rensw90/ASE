@@ -39,12 +39,16 @@ public class ApplyRegistrationEndpoint {
         result.setSucceeded(false);
         if (verifyRegistration.verifyRegistration(req.getInput().getSubscriber()) == true) {
             result.setSucceeded(true);
-            result.setMessage("Could not save your registration");
-            if (saveRegistration.saveSubscriber(req.getInput().getSubscriber())) {
-                result.setMessage("succeeded");
-                result.setSucceeded(true);
-                conformRegistration.confirmNewSubscriber(req.getInput().getSubscriber());
+            result.setMessage("invalid payment data");
+            if (verifyPayment.verifyPaymentData(req.getInput().getPaymentData())) {
+                result.setMessage("Could not save your registration");
+                if (saveRegistration.saveSubscriber(req.getInput().getSubscriber())) {
+                    result.setMessage("succeeded");
+                    result.setSucceeded(true);
+                    conformRegistration.confirmNewSubscriber(req.getInput().getSubscriber());
+                }
             }
+
             //conformRegistration.confirmNewSubscriber(req.getInput().getSubscriber());
         } else {
 

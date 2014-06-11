@@ -2,12 +2,10 @@ package nl.ase.dare2date.webservice.payment;
 
 import nl.ase.dare2date.webservice.PaymentData;
 
-import java.io.IOException;
-
 /**
  * Created by Rens on 3-6-2014.
  */
 public interface IVerifyPayment {
 
-    public boolean verifyPaymentData(PaymentData paymentData) throws IOException;
+    public boolean verifyPaymentData(PaymentData paymentData);
 }

@@ -9,7 +9,6 @@ import nl.ase.dare2date.webservice.PaymentData;
 import org.json.JSONObject;
 
 import javax.ws.rs.core.MediaType;
-import java.io.IOException;
 
 /**
  * Created by Rens on 3-6-2014.
@@ -23,7 +22,7 @@ public class PayPalAdapter implements IMakePayment {
         String clientSecret = "EH7fahDhT6rHE6C-gX3v-sf-zv1pFIgC0kEGbf2B1V7UIDg4c9GBxAk9OvEv";
     }
 
-    public boolean payment(PaymentData paymentData) throws IOException {
+    public boolean payment(PaymentData paymentData) {
         /*
         String baseUrl = "https://api.sandbox.paypal.com";
         String urlRequest = "/v1/vault/credit-card";
