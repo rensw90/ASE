@@ -24,19 +24,20 @@ public class PayPalAdapter implements IMakePayment {
     }
 
     public boolean payment(PaymentData paymentData) throws IOException {
+        /*
         String baseUrl = "https://api.sandbox.paypal.com";
         String urlRequest = "/v1/vault/credit-card";
         String url = baseUrl + urlRequest;
         this.doGet(url);
+        */
+        String token = getPayPalAccessToken();
+        System.out.println(token);
+        System.out.println("TEST");
+
         return false;
     }
 
-    public Boolean doGet(String url) throws IOException {
-        /*
-        String baseUrl = "https://api.sandbox.paypal.com";
-        String urlRequest = "/v1/payments/payment";
-        String url = baseUrl + urlRequest;
-        */
+    public String getPayPalAccessToken() {
         Client client = Client.create();
         client.addFilter(new HTTPBasicAuthFilter("Acd-OBCht6k0EBUrT0RH-gfSA9pjlWqLyflGslo-qBBEPoIfcp_mrlyHyGk9", "EH7fahDhT6rHE6C-gX3v-sf-zv1pFIgC0kEGbf2B1V7UIDg4c9GBxAk9OvEv"));
 
@@ -50,9 +51,8 @@ public class PayPalAdapter implements IMakePayment {
         String output = clientResponse.getEntity(String.class);
         JSONObject test = new JSONObject(output);
 
-
-        System.out.println("@@@@@@@@" + test.getString("access_token"));
-
-        return true;
+        return test.getString("access_token");
     }
+
+
 }
