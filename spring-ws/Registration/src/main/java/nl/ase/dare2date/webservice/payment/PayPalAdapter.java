@@ -18,10 +18,12 @@ public class PayPalAdapter implements IMakePayment {
     private final String USER_AGENT = "Mozilla/5.0";
     private String charset = "UTF-8";
     private String accessToken = "";
-    private String clientID = "Acd-OBCht6k0EBUrT0RH-gfSA9pjlWqLyflGslo-qBBEPoIfcp_mrlyHyGk9";
-    private String clientSecret = "EH7fahDhT6rHE6C-gX3v-sf-zv1pFIgC0kEGbf2B1V7UIDg4c9GBxAk9OvEv";
+    private String clientID;
+    private String clientSecret;
 
-    public PayPalAdapter() {
+    public PayPalAdapter(String clientID, String clientSecret) {
+        this.clientID = clientID;
+        this.clientSecret = clientSecret;
     }
 
     public boolean payment(PaymentData paymentData) {

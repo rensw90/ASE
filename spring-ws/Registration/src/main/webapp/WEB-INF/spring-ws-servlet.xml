@@ -40,7 +40,10 @@
     <bean id="verifyPayment" class="nl.ase.dare2date.webservice.payment.VerifyPayment">
         <constructor-arg ref="makePayment"/>
     </bean>
-    <bean id="makePayment" class="nl.ase.dare2date.webservice.payment.PayPalAdapter"></bean>
+    <bean id="makePayment" class="nl.ase.dare2date.webservice.payment.PayPalAdapter">
+        <constructor-arg type="java.lang.String" value="Acd-OBCht6k0EBUrT0RH-gfSA9pjlWqLyflGslo-qBBEPoIfcp_mrlyHyGk9"/>
+        <constructor-arg type="java.lang.String" value="EH7fahDhT6rHE6C-gX3v-sf-zv1pFIgC0kEGbf2B1V7UIDg4c9GBxAk9OvEv"/>
+    </bean>
 
     <bean class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
         <constructor-arg ref="marshaller"/>
