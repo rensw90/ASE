@@ -14,7 +14,6 @@ public class VerifyPayment implements IVerifyPayment {
     }
 
     public boolean verifyPaymentData(PaymentData paymentData) {
-        makePayment.payment(paymentData);
-        return false;
+        return makePayment.payment(paymentData);
     }
 }
