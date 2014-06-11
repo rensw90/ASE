@@ -28,8 +28,8 @@ public class SaveRegistration implements ISaveRegistration {
             em.persist(subscriberPersistence);
             tx.commit();
         } catch (Throwable e) {
-            //e.printStackTrace();
-            return false;
+            e.printStackTrace();
+            //return false;
         }
         return true;
     }

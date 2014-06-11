@@ -3,4 +3,7 @@
   <data-source source="LOCAL" name="calculator" uuid="8d8120c9-dd38-4d72-9222-099680dea111">
     <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
   </data-source>
+  <data-source source="LOCAL" name="subscriber" uuid="1d30e474-1f80-4a3d-a92d-e164cae3c009">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
 </component>

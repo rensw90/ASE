@@ -36,15 +36,21 @@ public class ApplyRegistrationEndpoint {
     public RegistrationResponse applyRegistration(RegistrationRequest req) {
 
         RegistrationResult result = new RegistrationResult();
+        result.setSucceeded(false);
         if (verifyRegistration.verifyRegistration(req.getInput().getSubscriber()) == true) {
             result.setSucceeded(true);
+            result.setMessage("Could not save your registration");
+            if (saveRegistration.saveSubscriber(req.getInput().getSubscriber())) {
+                result.setMessage("succeeded");
+                result.setSucceeded(true);
+                conformRegistration.confirmNewSubscriber(req.getInput().getSubscriber());
+            }
             //conformRegistration.confirmNewSubscriber(req.getInput().getSubscriber());
         } else {
-            result.setSucceeded(false);
+
+            result.setMessage("ïnvalid email");
         }
-        saveRegistration.saveSubscriber(req.getInput().getSubscriber());
-        result.setMessage("Here are the results of the jury for the calculation ");
-        //result.setSucceeded(false);
+
         RegistrationResponse resp = new RegistrationResponse();
         resp.setResult(result);
 

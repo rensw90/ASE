@@ -39,7 +39,7 @@ public class ConfirmRegistration implements IConformRegistration {
                 "/messages");
 
         MultivaluedMapImpl formData = new MultivaluedMapImpl();
-        formData.add("from", "Dare2Date <dare2date@" + domain + ">");
+        formData.add("from", "Dare2Date <noreply@" + domain + ">");
         formData.add("to", to);
         formData.add("subject", subject);
         formData.add("text", text);

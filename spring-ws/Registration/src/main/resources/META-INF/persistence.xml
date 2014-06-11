@@ -9,7 +9,7 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
         <class>nl.ase.dare2date.webservice.persistence.SubscriberPersistence</class>
         <properties>
             <!-- set value on "create" only on first boot, set it to update after the first boot otherwise your database will always be recreated -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.archive.autodetection" value="class, hbm"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
