@@ -8,13 +8,14 @@
           class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
         <property name="xsds">
             <list>
-                <value>/applyregistrationservice/messages.xsd</value>
+                <value>/applyregistrationservice/types.xsd</value>
             </list>
         </property>
         <property name="inline" value="true"/>
     </bean>
-    <bean id="applyregistration" class="nl.han.dare2date.service.web.ApplyRegistrationServiceEndpoint">
-        <constructor-arg ref="marshaller"/>
+    <bean id="applyregistration"
+          class="nl.han.dare2date.service.web.applyregistration.ApplyRegistrationServiceEndpoint">
+    <constructor-arg ref="marshaller"/>
         <constructor-arg ref="unmarshaller"/>
     </bean>
     <bean class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">

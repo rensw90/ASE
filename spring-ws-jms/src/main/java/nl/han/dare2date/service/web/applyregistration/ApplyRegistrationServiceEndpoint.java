@@ -20,10 +20,13 @@
     THE SOFTWARE.
 */
 
-package nl.han.dare2date.service.web;
+package nl.han.dare2date.service.web.applyregistration;
 
-import nl.han.dare2date.applyregistrationservice.ApplyRegistrationRequest;
-import nl.han.dare2date.applyregistrationservice.ApplyRegistrationResponse;
+import nl.han.dare2date.applyregistrationservice.*;
+import nl.han.dare2date.service.web.confirmregistration.ConfirmRegistrationService;
+import nl.han.dare2date.service.web.confirmregistration.IConfirmRegistrationService;
+import nl.han.dare2date.service.web.validateCreditcard.IValidateCreditcardService;
+import nl.han.dare2date.service.web.validateCreditcard.ValidateCreditcardService;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.Unmarshaller;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -43,6 +46,23 @@ public class ApplyRegistrationServiceEndpoint {
     @SuppressWarnings({"unchecked", "deprecation"})
     @PayloadRoot(localPart = "ApplyRegistrationRequest", namespace = "http://www.han.nl/schemas/messages")
     public ApplyRegistrationResponse applyRegistration(ApplyRegistrationRequest req) {
-        return new ApplyRegistrationResponse();
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
+        Registration reg = req.getRegistration();
+        int regNumber = reg.getNumber();
+        User usr = reg.getUser();
+        Creditcard cc = usr.getCard();
+
+        //IValidateCreditcardService vcs = serviceLocator.getService(IValidateCreditcardService.class);
+        IValidateCreditcardService vcs = new ValidateCreditcardService();
+        boolean isValid = vcs.validate(cc);
+        if (isValid) {
+            //IConfirmRegistrationService crs = serviceLocator.getService(IConfirmRegistrationService.class);
+            IConfirmRegistrationService crs = new ConfirmRegistrationService();
+            crs.confirm(reg);
+        }
+        reg.setSuccesFul(isValid);
+        ApplyRegistrationResponse response = new ObjectFactory().createApplyRegistrationResponse();
+        response.setRegistration(reg);
+        return response;
     }
 }

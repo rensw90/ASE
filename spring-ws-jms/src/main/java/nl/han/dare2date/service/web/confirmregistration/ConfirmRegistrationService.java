@@ -20,18 +20,16 @@
     THE SOFTWARE.
 */
 
-package nl.han.dare2date.service.web;
+package nl.han.dare2date.service.web.confirmregistration;
 
-import nl.han.dare2date.applyregistrationservice.Creditcard;
+import nl.han.dare2date.applyregistrationservice.Registration;
 
 /**
  * @author mdkr
  *         <p/>
- *         Is used as a JMS client using request-reply
+ *         Is used as a JMS publisher
  */
-public class ValidateCreditcardService {
-
-    public boolean validate(Creditcard cc) {
-        return false;
+public class ConfirmRegistrationService implements IConfirmRegistrationService {
+    public void confirm(Registration reg) {
     }
 }
