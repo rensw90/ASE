@@ -3,8 +3,7 @@
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
     <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>
-    <bean id="messageReceiver"
-          class="org.springframework.ws.soap.server.SoapMessageDispatcher"/>
+    <bean id="messageReceiver" class="org.springframework.ws.soap.server.SoapMessageDispatcher"/>
     <bean id="schemaCollection"
           class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
         <property name="xsds">
