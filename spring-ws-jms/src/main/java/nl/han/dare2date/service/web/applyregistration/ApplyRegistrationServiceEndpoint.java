@@ -23,10 +23,9 @@
 package nl.han.dare2date.service.web.applyregistration;
 
 import nl.han.dare2date.applyregistrationservice.*;
-import nl.han.dare2date.service.web.confirmregistration.ConfirmRegistrationService;
+import nl.han.dare2date.service.jms.locator.IServiceLocator;
 import nl.han.dare2date.service.web.confirmregistration.IConfirmRegistrationService;
 import nl.han.dare2date.service.web.validateCreditcard.IValidateCreditcardService;
-import nl.han.dare2date.service.web.validateCreditcard.ValidateCreditcardService;
 import org.springframework.oxm.Marshaller;
 import org.springframework.oxm.Unmarshaller;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -36,28 +35,30 @@ import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 public class ApplyRegistrationServiceEndpoint {
     private Marshaller marshaller;
     private Unmarshaller unmarshaller;
+    private IServiceLocator serviceLocator;
 
     public ApplyRegistrationServiceEndpoint(Marshaller marshaller,
-                                            Unmarshaller unmarshaller) {
+                                            Unmarshaller unmarshaller, IServiceLocator serviceLocator) {
         this.marshaller = marshaller;
         this.unmarshaller = unmarshaller;
+        this.serviceLocator = serviceLocator;
     }
 
     @SuppressWarnings({"unchecked", "deprecation"})
     @PayloadRoot(localPart = "ApplyRegistrationRequest", namespace = "http://www.han.nl/schemas/messages")
     public ApplyRegistrationResponse applyRegistration(ApplyRegistrationRequest req) {
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
+        //System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2");
         Registration reg = req.getRegistration();
         int regNumber = reg.getNumber();
         User usr = reg.getUser();
         Creditcard cc = usr.getCard();
 
-        //IValidateCreditcardService vcs = serviceLocator.getService(IValidateCreditcardService.class);
-        IValidateCreditcardService vcs = new ValidateCreditcardService();
+        IValidateCreditcardService vcs = serviceLocator.getService(IValidateCreditcardService.class);
+        //IValidateCreditcardService vcs = new ValidateCreditcardService();
         boolean isValid = vcs.validate(cc);
         if (isValid) {
-            //IConfirmRegistrationService crs = serviceLocator.getService(IConfirmRegistrationService.class);
-            IConfirmRegistrationService crs = new ConfirmRegistrationService();
+            IConfirmRegistrationService crs = serviceLocator.getService(IConfirmRegistrationService.class);
+            //IConfirmRegistrationService crs = new ConfirmRegistrationService();
             crs.confirm(reg);
         }
         reg.setSuccesFul(isValid);

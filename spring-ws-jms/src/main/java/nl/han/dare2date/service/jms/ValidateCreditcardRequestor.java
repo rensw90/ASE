@@ -1,6 +1,7 @@
-package nl.han.dare2date.service.jms.util;
+package nl.han.dare2date.service.jms;
 
 import nl.han.dare2date.applyregistrationservice.Creditcard;
+import nl.han.dare2date.service.jms.util.Requestor;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;

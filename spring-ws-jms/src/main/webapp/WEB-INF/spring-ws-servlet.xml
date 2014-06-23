@@ -8,15 +8,16 @@
           class="org.springframework.xml.xsd.commons.CommonsXsdSchemaCollection">
         <property name="xsds">
             <list>
-                <value>/applyregistrationservice/types.xsd</value>
+                <value>/applyregistrationservice/messages.xsd</value>
             </list>
         </property>
         <property name="inline" value="true"/>
     </bean>
     <bean id="applyregistration"
           class="nl.han.dare2date.service.web.applyregistration.ApplyRegistrationServiceEndpoint">
-    <constructor-arg ref="marshaller"/>
+        <constructor-arg ref="marshaller"/>
         <constructor-arg ref="unmarshaller"/>
+        <constructor-arg ref="serviceLocator"/>
     </bean>
     <bean class="org.springframework.ws.server.endpoint.adapter.MarshallingMethodEndpointAdapter">
         <constructor-arg ref="marshaller"/>
@@ -27,6 +28,7 @@
     <bean id="unmarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
         <property name="contextPath" value="nl.han.dare2date.applyregistrationservice"/>
     </bean>
+    <bean id="serviceLocator" class="nl.han.dare2date.service.jms.locator.ServiceLocator"></bean>
     <bean id="annotationMapping"
           class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
         <property name="interceptors">

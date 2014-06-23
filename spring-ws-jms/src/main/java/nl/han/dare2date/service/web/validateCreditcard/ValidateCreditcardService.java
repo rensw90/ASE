@@ -2,10 +2,10 @@ package nl.han.dare2date.service.web.validateCreditcard;
 
 
 import nl.han.dare2date.applyregistrationservice.Creditcard;
+import nl.han.dare2date.service.jms.Queues;
+import nl.han.dare2date.service.jms.ValidateCreditcardRequestor;
+import nl.han.dare2date.service.jms.ValidateCreditcardResponse;
 import nl.han.dare2date.service.jms.util.JMSUtil;
-import nl.han.dare2date.service.jms.util.Queues;
-import nl.han.dare2date.service.jms.util.ValidateCreditcardRequestor;
-import nl.han.dare2date.service.jms.util.ValidateCreditcardResponse;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;
@@ -25,14 +25,15 @@ public class ValidateCreditcardService implements Queues, IValidateCreditcardSer
         String replyQueueName = Queues.REPLY_QUEUE;
         String invalidQueueName = Queues.INVALID_QUEUE;
 
-        // Creditcard card = new Creditcard();
-        // card.cvc = cc.getCvc();
-        // card.Number = cc.getNumber();
-        // card.validTrough = cc.getValidThrough();
+        Creditcard card = new Creditcard();
+        card.setCvc(cc.getCvc());
+        card.setNumber(cc.getNumber());
+        card.setValidThrough(cc.getValidThrough());
 
         try {
-            ValidateCreditcardRequestor requestor = new ValidateCreditcardRequestor(conn, requestQueueName, replyQueueName, invalidQueueName, cc);
+            ValidateCreditcardRequestor requestor = new ValidateCreditcardRequestor(conn, requestQueueName, replyQueueName, invalidQueueName, card);
             requestor.send();
+
             requestor.receiveSync();
             ValidateCreditcardResponse response = requestor.getResponse();
             conn.close();

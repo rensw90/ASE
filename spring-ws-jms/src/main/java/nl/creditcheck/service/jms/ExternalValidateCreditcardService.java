@@ -1,7 +1,7 @@
 package nl.creditcheck.service.jms;
 
+import nl.han.dare2date.service.jms.Queues;
 import nl.han.dare2date.service.jms.util.JMSUtil;
-import nl.han.dare2date.service.jms.util.Queues;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;

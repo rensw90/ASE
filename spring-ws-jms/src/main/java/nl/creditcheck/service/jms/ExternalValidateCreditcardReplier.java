@@ -1,9 +1,9 @@
 package nl.creditcheck.service.jms;
 
 import nl.han.dare2date.applyregistrationservice.Creditcard;
+import nl.han.dare2date.service.jms.ValidateCreditcardRequest;
+import nl.han.dare2date.service.jms.ValidateCreditcardResponse;
 import nl.han.dare2date.service.jms.util.Replier;
-import nl.han.dare2date.service.jms.util.ValidateCreditcardRequest;
-import nl.han.dare2date.service.jms.util.ValidateCreditcardResponse;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;
@@ -32,8 +32,10 @@ public class ExternalValidateCreditcardReplier extends Replier {
         try {
             msg = getSession().createObjectMessage();
             boolean isValid = false;
-            if (card.getCvc() == 1234 && card.getNumber() == 4321) {
+            //System.out.println(card.getCvc() + " number: " +  card.getNumber());
+            if (card.getNumber() == 1234 && card.getCvc() == 4321) {
                 isValid = true;
+                //System.out.println(" valid: ");
             }
             ValidateCreditcardResponse response = new ValidateCreditcardResponse(isValid);
             msg.setObject(response);

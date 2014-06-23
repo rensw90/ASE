@@ -1,4 +1,4 @@
-package nl.han.dare2date.service.jms.util;
+package nl.han.dare2date.service.jms;
 
 import nl.han.dare2date.applyregistrationservice.Creditcard;
 

@@ -23,6 +23,12 @@
 package nl.han.dare2date.service.web.confirmregistration;
 
 import nl.han.dare2date.applyregistrationservice.Registration;
+import nl.han.dare2date.service.jms.ConfirmRegistrationRequest;
+import nl.han.dare2date.service.jms.Queues;
+import nl.han.dare2date.service.jms.util.SubjectGateway;
+
+import javax.jms.JMSException;
+import javax.naming.NamingException;
 
 /**
  * @author mdkr
@@ -31,5 +37,17 @@ import nl.han.dare2date.applyregistrationservice.Registration;
  */
 public class ConfirmRegistrationService implements IConfirmRegistrationService {
     public void confirm(Registration reg) {
+        ConfirmRegistrationRequest request = new ConfirmRegistrationRequest();
+        try {
+
+            SubjectGateway gateway = new SubjectGateway(Queues.UPDATE_TOPIC_NAME);
+            gateway.notifyObservers(request);
+
+        } catch (NamingException e) {
+            e.printStackTrace();
+        } catch (JMSException e) {
+            e.printStackTrace();
+        }
     }
 }
+
